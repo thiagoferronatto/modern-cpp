@@ -71,8 +71,11 @@ template <typename T> auto Array<T>::push(const T &value) {
 }
 
 template <typename T> auto Array<T>::remove(const T &value) {
-  std::remove(data_, data_ + size_, value);
-  --size_;
+  if (std::remove(data_, data_ + size_, value) < end()) {
+    --size_;
+    return true;
+  }
+  return false;
 }
 
 template <typename T> auto Array<T>::contains(const T &value) const {

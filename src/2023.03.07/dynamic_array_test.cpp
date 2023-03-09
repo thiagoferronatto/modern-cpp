@@ -16,7 +16,9 @@ auto testDynamicArray() {
   if (a.contains(3))
     std::cout << "a contains 3" << std::endl;
 
-  a.remove(3);
+  std::cout << "removed 3? " << a.remove(3) << std::endl;
+
+  std::cout << "removed 20? " << a.remove(20) << std::endl;
 
   std::cout << "a = " << a << std::endl;
 

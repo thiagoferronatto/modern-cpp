@@ -1,5 +1,5 @@
-#ifndef EVERYTHING_INCLUDE_ARRAY_HPP
-#define EVERYTHING_INCLUDE_ARRAY_HPP
+#ifndef MODERN_CPP_INCLUDE_2023_03_07_ARRAY_HPP
+#define MODERN_CPP_INCLUDE_2023_03_07_ARRAY_HPP
 
 #include <algorithm>
 #include <cmath>
@@ -144,4 +144,4 @@ std::ostream &operator<<(std::ostream &stream, const Array<T> &array) {
 
 } // namespace class_of_2023_03_07
 
-#endif // EVERYTHING_INCLUDE_ARRAY_HPP
+#endif // MODERN_CPP_INCLUDE_2023_03_07_ARRAY_HPP

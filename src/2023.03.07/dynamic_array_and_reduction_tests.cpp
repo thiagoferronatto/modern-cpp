@@ -1,4 +1,4 @@
-#include "dynamic_array_test.hpp"
+#include "dynamic_array_and_reduction_tests.hpp"
 #include "dynamic_array.hpp"
 #include "reduce.hpp"
 #include <cstdlib>
@@ -33,7 +33,7 @@ void testDynamicArray() {
 }
 
 void testReduction() {
-  using class_of_2023_03_07::Array;
+  using namespace class_of_2023_03_07;
 
   Array<float> array{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 

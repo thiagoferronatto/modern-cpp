@@ -25,7 +25,6 @@ public:
   [[nodiscard]] auto contains(const T &) const;
   auto clear();
   [[nodiscard]] auto size() const;
-  auto shrinkToFit();
 
   [[nodiscard]] const auto &operator[](std::size_t) const;
   auto &operator[](std::size_t);
@@ -89,8 +88,6 @@ template <typename T> auto Array<T>::clear() {
 }
 
 template <typename T> auto Array<T>::size() const { return size_; }
-
-template <typename T> auto Array<T>::shrinkToFit() { reallocate_(size_); }
 
 template <typename T>
 const auto &Array<T>::operator[](std::size_t index) const {

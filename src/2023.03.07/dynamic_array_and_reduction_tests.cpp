@@ -1,7 +1,6 @@
 #include "dynamic_array_and_reduction_tests.hpp"
 #include "dynamic_array.hpp"
 #include "reduce.hpp"
-#include <cstdlib>
 #include <iostream>
 
 void testDynamicArray() {

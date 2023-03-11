@@ -18,7 +18,7 @@ public:
   class Iterator : public std::iterator<std::forward_iterator_tag, T> {
   public:
     Iterator() = default;
-    Iterator(Node *);
+    explicit Iterator(Node *);
     Iterator(const Iterator &);
 
     Iterator &operator=(const Iterator &);
@@ -41,9 +41,9 @@ public:
 
   auto push(const T &);
   auto remove(const T &);
-  auto contains(const T &) const;
+  [[maybe_unused]] auto contains(const T &) const;
   auto clear();
-  auto size() const;
+  [[maybe_unused]] auto size() const;
 
   auto begin();
   auto end();
@@ -51,8 +51,6 @@ public:
   auto end() const;
 
 private:
-  void rebaseTail_();
-
   Node *head_, *tail_;
   std::size_t size_;
 };
@@ -142,7 +140,8 @@ template <typename T> auto LinkedList<T>::remove(const T &value) {
   return false;
 }
 
-template <typename T> auto LinkedList<T>::contains(const T &value) const {
+template <typename T>
+[[maybe_unused]] auto LinkedList<T>::contains(const T &value) const {
   auto tmp = end();
   return std::find(begin(), tmp, value) != tmp;
 }
@@ -157,7 +156,7 @@ template <typename T> auto LinkedList<T>::clear() {
   size_ = 0;
 }
 
-template <typename T> auto LinkedList<T>::size() const { return size_; }
+template <typename T> [[maybe_unused]] auto LinkedList<T>::size() const { return size_; }
 
 template <typename T> auto LinkedList<T>::begin() { return Iterator(head_); }
 
@@ -168,14 +167,6 @@ template <typename T> auto LinkedList<T>::begin() const {
 }
 
 template <typename T> auto LinkedList<T>::end() const { return Iterator(); }
-
-template <typename T> void LinkedList<T>::rebaseTail_() {
-  for (auto it = head_; it; it = it->next)
-    if (it->next == nullptr) {
-      tail_ = it;
-      return;
-    }
-}
 
 } // namespace class_of_2023_03_09
 

@@ -37,6 +37,6 @@ void testReduction() {
   Array<float> array{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
   std::cout << "reduction: "
-            << reduce(std::cbegin(array), std::cend(array), std::plus())
+            << reduce(std::cbegin(array), std::cend(array), std::plus(), 0.0F)
             << std::endl;
 }

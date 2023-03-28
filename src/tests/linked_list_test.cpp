@@ -1,9 +1,9 @@
-#include "linked_list_test.hpp"
-#include "linked_list.hpp"
+#include "tests/linked_list_test.hpp"
+#include "data_structures/linked_list.hpp"
 #include <iostream>
 
 void testLinkedList() {
-  using class_of_2023_03_09::LinkedList;
+  using data_structures::LinkedList;
 
   LinkedList<int> l;
 

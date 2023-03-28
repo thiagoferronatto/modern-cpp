@@ -1,5 +1,5 @@
-#ifndef MODERN_CPP_INCLUDE_2023_03_07_ARRAY_HPP
-#define MODERN_CPP_INCLUDE_2023_03_07_ARRAY_HPP
+#ifndef MODERN_CPP_INC_DATA_STRUCTURES_ARRAY_HPP
+#define MODERN_CPP_INC_DATA_STRUCTURES_ARRAY_HPP
 
 #include <algorithm>
 #include <cmath>
@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iterator>
 
-namespace class_of_2023_03_07 {
+namespace data_structures {
 
 template <typename T> class Array {
 public:
@@ -140,6 +140,6 @@ std::ostream &operator<<(std::ostream &stream, const Array<T> &array) {
   return stream << ']';
 }
 
-} // namespace class_of_2023_03_07
+} // namespace data_structures
 
-#endif // MODERN_CPP_INCLUDE_2023_03_07_ARRAY_HPP
+#endif // MODERN_CPP_INC_DATA_STRUCTURES_ARRAY_HPP

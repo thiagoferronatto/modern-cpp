@@ -1,11 +1,11 @@
-#ifndef MODERN_CPP_INCLUDE_2023_03_09_LINKED_LIST_HPP
-#define MODERN_CPP_INCLUDE_2023_03_09_LINKED_LIST_HPP
+#ifndef MODERN_CPP_INC_DATA_STRUCTURES_LINKED_LIST_HPP
+#define MODERN_CPP_INC_DATA_STRUCTURES_LINKED_LIST_HPP
 
 #include <algorithm>
 #include <cstdint>
 #include <iterator>
 
-namespace class_of_2023_03_09 {
+namespace data_structures {
 
 template <typename T> class LinkedList {
 private:
@@ -23,7 +23,7 @@ public:
 
     Iterator &operator=(const Iterator &);
     Iterator operator++();
-    Iterator operator++(int);
+    const Iterator operator++(int);
     T operator*() const;
     T &operator*();
     bool operator==(const Iterator &) const;
@@ -81,7 +81,7 @@ LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++() {
 }
 
 template <typename T>
-LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++(int) {
+const LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++(int) {
   const auto result = Iterator(*this);
   advanceIfNotNull_();
   return result;
@@ -170,4 +170,4 @@ template <typename T> auto LinkedList<T>::end() const { return Iterator(); }
 
 } // namespace class_of_2023_03_09
 
-#endif // MODERN_CPP_INCLUDE_2023_03_09_LINKED_LIST_HPP
+#endif // MODERN_CPP_INC_DATA_STRUCTURES_LINKED_LIST_HPP

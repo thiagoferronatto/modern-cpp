@@ -1,10 +1,10 @@
-#include "dynamic_array_and_reduction_tests.hpp"
-#include "dynamic_array.hpp"
-#include "reduce.hpp"
+#include "tests/dynamic_array_and_reduction_tests.hpp"
+#include "algorithms/reduce.hpp"
+#include "data_structures/dynamic_array.hpp"
 #include <iostream>
 
 void testDynamicArray() {
-  using class_of_2023_03_07::Array;
+  using data_structures::Array;
 
   Array<unsigned> a;
 
@@ -32,7 +32,8 @@ void testDynamicArray() {
 }
 
 void testReduction() {
-  using namespace class_of_2023_03_07;
+  using algorithms::reduce;
+  using data_structures::Array;
 
   Array<float> array{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 

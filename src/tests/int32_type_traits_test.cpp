@@ -4,11 +4,11 @@
 #include <iostream>
 
 void testInt32TypeTraits() {
-  using type_traits::isInt32;
-  std::cout << (isInt32<int>() ? "int is int" : "wtf") << '\n'
-            << (isInt32<unsigned>() ? "unsigned is int" : "expected tbh")
+  using type_traits::IsInt32;
+  std::cout << (IsInt32<int>::value ? "int is int" : "wtf") << '\n'
+            << (IsInt32<unsigned>::value ? "unsigned is int" : "expected tbh")
             << '\n'
-            << (isInt32<float>() ? "honestly this is getting crazy rn"
-                                 : "based")
+            << (IsInt32<float>::value ? "honestly this is getting crazy rn"
+                                      : "based")
             << std::endl;
 }

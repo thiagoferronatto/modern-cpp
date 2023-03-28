@@ -5,9 +5,13 @@
 
 namespace type_traits {
 
-template <typename T> inline constexpr bool isInt32() { return false; }
+template <typename T> struct IsInt32 {
+  static constexpr const bool value = false;
+};
 
-template <> inline constexpr bool isInt32<std::int32_t>() { return true; }
+template <> struct IsInt32<std::int32_t> {
+  static constexpr const bool value = true;
+};
 
 } // namespace type_traits
 

@@ -4,9 +4,9 @@ project(modern_cpp)
 
 include_directories(inc inc/2023.03.07 inc/2023.03.09)
 
-add_compile_options(-W -Wall -Wextra -std=c++23 -g)
+add_compile_options(-W -Wall -Wextra -std=c++20 -g)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(modern_cpp src/tests/dynamic_array_and_reduction_tests.cpp
         inc/data_structures/dynamic_array.hpp

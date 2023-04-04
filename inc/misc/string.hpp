@@ -207,7 +207,7 @@ mcpp::BasicString<T>::BasicString(std::size_t initialCapacity)
 template <typename T>
 std::size_t mcpp::BasicString<T>::strLen_(const T *str) const {
   std::size_t strLen = 0;
-  const T zero = 0;
+  static constexpr auto zero = T();
   for (auto p = str; *p != zero; ++strLen, ++p)
     ;
   return strLen;

@@ -65,8 +65,7 @@ inline mcpp::BasicString<T>::BasicString() : data_(nullptr), size_(0) {}
 
 template <typename T>
 mcpp::BasicString<T>::BasicString(const BasicString &other)
-    : size_(other.size_) {
-  data_ = new T[size_];
+    : data_(new T[other.size_]), size_(other.size_) {
   std::copy(other.data_, other.data_ + size_, data_);
 }
 

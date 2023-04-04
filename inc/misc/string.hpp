@@ -141,7 +141,7 @@ inline bool mcpp::BasicString<T>::operator!=(const BasicString &other) const {
 
 template <typename T>
 inline bool mcpp::BasicString<T>::operator!=(const T *other) const {
-  return !operator!=(other);
+  return !operator==(other);
 }
 
 template <typename T>
@@ -206,11 +206,10 @@ mcpp::BasicString<T>::BasicString(std::size_t initialCapacity)
 
 template <typename T>
 std::size_t mcpp::BasicString<T>::strLen_(const T *str) const {
-  std::size_t strLen = 0;
-  static constexpr auto zero = T();
-  for (auto p = str; *p != zero; ++strLen, ++p)
+  auto p = str;
+  for (; *p != 0; ++p)
     ;
-  return strLen;
+  return p - str;
 }
 
 template <typename T> void mcpp::BasicString<T>::resize_(std::size_t newSize) {

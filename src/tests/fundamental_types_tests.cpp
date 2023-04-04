@@ -12,7 +12,7 @@
 #include <type_traits>
 
 // stolen from https://stackoverflow.com/a/4541470
-template <typename T> constexpr std::string demangledName() {
+template <typename T> std::string demangledName() {
   int status;
   std::unique_ptr<char, void (*)(void *)> res(
       abi::__cxa_demangle(typeid(T).name(), nullptr, nullptr, &status),
@@ -27,8 +27,8 @@ template <typename T> struct TypeInfo {
   static constexpr auto max = std::numeric_limits<T>::max();
 };
 
-template <typename T> constexpr auto getTypeInfo() {
-  std::conditional_t<type_traits::IsCharV<T>, long long, T>
+template <typename T> auto getTypeInfo() {
+  std::conditional_t<mcpp::type_traits::IsCharV<T>, long long, T>
       min = std::numeric_limits<T>::lowest(),
       max = std::numeric_limits<T>::max();
   std::stringstream ss;
@@ -38,6 +38,7 @@ template <typename T> constexpr auto getTypeInfo() {
 }
 
 void testFundamentalTypes() {
+  std::cout << "--- TESTING FUNDAMENTAL TYPES ---\n";
   std::cout << getTypeInfo<bool>() << '\n'
             << getTypeInfo<signed char>() << '\n'
             << getTypeInfo<char>() << '\n'

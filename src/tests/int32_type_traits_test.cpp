@@ -4,7 +4,10 @@
 #include <iostream>
 
 void testInt32TypeTraits() {
-  using type_traits::IsInt32;
+  using mcpp::type_traits::IsInt32;
+
+  std::cout << "--- TESTING TYPE TRAITS ---\n";
+
   std::cout << (IsInt32<int>::value ? "int is int" : "wtf") << '\n'
             << (IsInt32<unsigned>::value ? "unsigned is int" : "expected tbh")
             << '\n'

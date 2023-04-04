@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace type_traits {
+namespace mcpp::type_traits {
 
 template <typename T> struct IsInt32 {
   static constexpr const bool value = false;

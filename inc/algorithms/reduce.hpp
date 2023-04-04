@@ -1,7 +1,7 @@
 #ifndef MODERN_CPP_INC_ALGORITHMS_REDUCE_HPP
 #define MODERN_CPP_INC_ALGORITHMS_REDUCE_HPP
 
-namespace algorithms {
+namespace mcpp::algorithms {
 
 auto reduce(auto begin, auto end, auto operation, auto initialValue) {
   auto result = initialValue;

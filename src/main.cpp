@@ -2,6 +2,7 @@
 #include "tests/fundamental_types_tests.hpp"
 #include "tests/int32_type_traits_test.hpp"
 #include "tests/linked_list_test.hpp"
+#include "tests/string_tests.hpp"
 #include <cstdlib>
 
 int main() {
@@ -10,6 +11,7 @@ int main() {
   testLinkedList();
   testInt32TypeTraits();
   testFundamentalTypes();
+  testString();
 
   return EXIT_SUCCESS;
 }

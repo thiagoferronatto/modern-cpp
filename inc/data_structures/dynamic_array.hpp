@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iterator>
 
-namespace data_structures {
+namespace mcpp::data_structures {
 
 template <typename T> class Array {
 public:

@@ -3,7 +3,9 @@
 #include <iostream>
 
 void testLinkedList() {
-  using data_structures::LinkedList;
+  using mcpp::data_structures::LinkedList;
+
+  std::cout << "--- TESTING LINKED LISTS ---\n";
 
   LinkedList<int> l;
 
@@ -12,7 +14,7 @@ void testLinkedList() {
 
   for (auto i : l)
     std::cout << i << ' ';
-  std::cout << std::endl;
+  std::cout << '\n';
 
   l.remove(4);
 

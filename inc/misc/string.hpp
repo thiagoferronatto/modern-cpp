@@ -8,6 +8,7 @@
 
 namespace mcpp {
 
+// TODO: restrict T to character types using a concept
 template <typename T> class BasicString {
 public:
   BasicString();
@@ -44,6 +45,8 @@ public:
     return os;
   }
 
+  // TODO: add operator>> to read characters into the String
+
 private:
   explicit BasicString(std::size_t);
 
@@ -51,9 +54,11 @@ private:
   void resize_(std::size_t);
 
   static constexpr const char *const outOfRangeMsg_ = "out of range";
+  static constexpr std::size_t ssoBufSize_ = 16;
 
   T *data_;
   std::size_t size_;
+  T buf_[ssoBufSize_];
 };
 
 using String = BasicString<char>;
@@ -61,28 +66,36 @@ using String = BasicString<char>;
 } // namespace mcpp
 
 template <typename T>
-inline mcpp::BasicString<T>::BasicString() : data_(nullptr), size_(0) {}
+inline mcpp::BasicString<T>::BasicString() : data_(buf_), size_(0) {}
 
 template <typename T>
 mcpp::BasicString<T>::BasicString(const BasicString &other)
-    : data_(new T[other.size_]), size_(other.size_) {
+    : data_(buf_), size_(other.size_) {
+  if (other.size_ > ssoBufSize_)
+    data_ = new T[size_];
   std::copy(other.data_, other.data_ + size_, data_);
 }
 
 template <typename T>
 inline mcpp::BasicString<T>::BasicString(BasicString &&other) noexcept
-    : data_(other.data_), size_(other.size_) {
-  other.data_ = nullptr;
+    : data_(buf_), size_(other.size_) {
+  if (other.size_ > 16) {
+    data_ = other.data_;
+    other.data_ = nullptr;
+  } else
+    std::copy(other.data_, other.data_ + size_, buf_);
   other.size_ = 0;
 }
 
 template <typename T> mcpp::BasicString<T>::BasicString(const T *other) {
-  data_ = new T[size_ = strLen_(other)];
+  size_ = strLen_(other);
+  data_ = size_ > 16 ? new T[size_] : buf_;
   std::copy(other, other + size_, data_);
 }
 
 template <typename T> inline mcpp::BasicString<T>::~BasicString() {
-  delete[] data_;
+  if (data_ != buf_)
+    delete[] data_;
   size_ = 0;
 }
 
@@ -91,6 +104,7 @@ mcpp::BasicString<T> &
 mcpp::BasicString<T>::operator=(const BasicString &other) {
   if (this == &other)
     goto skipCopy;
+  // TODO: account for SSO, check if other.size_ > ssoBufSize_
   if (other.size_ != size_) // could be optimized for time by resizing only if
                             // other.size_ is greater, but would use more memory
     resize_(size_ = other.size_);
@@ -104,6 +118,7 @@ inline mcpp::BasicString<T> &
 mcpp::BasicString<T>::operator=(BasicString &&other) noexcept {
   if (this == &other)
     goto skipMove;
+  // TODO: account for SSO, check if other.size_ > ssoBufSize_
   delete[] data_;
   data_ = other.data_;
   size_ = other.size_;
@@ -115,6 +130,7 @@ skipMove:
 
 template <typename T>
 mcpp::BasicString<T> &mcpp::BasicString<T>::operator=(const T *other) {
+  // TODO: account for SSO
   auto otherLength = strLen_(other);
   if (size_ != otherLength)
     resize_(otherLength);

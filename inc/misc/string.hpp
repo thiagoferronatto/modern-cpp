@@ -48,7 +48,7 @@ public:
     return os;
   }
 
-  // TODO: add operator>> to read characters into the String
+  // TODO: maybe someday add an operator>> to insert values from istream
 
 private:
   explicit BasicString(std::size_t);
@@ -107,11 +107,19 @@ mcpp::BasicString<T> &
 mcpp::BasicString<T>::operator=(const BasicString &other) {
   if (this == &other)
     goto skipCopy;
-  // TODO: account for SSO, check if other.size_ > ssoBufSize_
-  if (other.size_ != size_) // could be optimized for time by resizing only if
-                            // other.size_ is greater, but would use more memory
-    resize_(size_ = other.size_);
-  std::copy(other.data_, other.data_ + size_, data_);
+  if (other.size_ > ssoBufSize_) {
+    // this resizes the array even if other.size_ == size_, but the additional
+    // ifs I'd have to write to optimize for that really specific case make me
+    // want to take my name off the census
+    if (data_ != buf_)
+      delete[] data_;
+    data_ = new T[other.size_];
+  } else if (data_ != buf_) {
+    delete[] data_;
+    data_ = buf_;
+  }
+  std::copy(other.data_, other.data_ + other.size_, data_);
+  size_ = other.size_;
 skipCopy:
   return *this;
 }
@@ -121,9 +129,17 @@ inline mcpp::BasicString<T> &
 mcpp::BasicString<T>::operator=(BasicString &&other) noexcept {
   if (this == &other)
     goto skipMove;
-  // TODO: account for SSO, check if other.size_ > ssoBufSize_
-  delete[] data_;
-  data_ = other.data_;
+  if (other.size_ > ssoBufSize_) {
+    if (data_ != buf_)
+      delete[] data_;
+    data_ = other.data_;
+  } else {
+    if (data_ != buf_) {
+      delete[] data_;
+      data_ = buf_;
+    }
+    std::copy(other.data_, other.data_ + other.size_, data_); // tiny copy
+  }
   size_ = other.size_;
   other.data_ = nullptr;
   other.size_ = 0;
@@ -133,11 +149,17 @@ skipMove:
 
 template <mcpp::Char T>
 mcpp::BasicString<T> &mcpp::BasicString<T>::operator=(const T *other) {
-  // TODO: account for SSO
   auto otherLength = strLen_(other);
-  if (size_ != otherLength)
-    resize_(otherLength);
-  std::copy(other, other + size_, data_);
+  if (otherLength > ssoBufSize_) {
+    if (data_ != buf_)
+      delete[] data_;
+    data_ = new T[otherLength];
+  } else if (data_ != buf_) {
+    delete[] data_;
+    data_ = buf_;
+  }
+  std::copy(other, other + otherLength, data_);
+  size_ = otherLength;
   return *this;
 }
 

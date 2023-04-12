@@ -55,8 +55,8 @@ private:
 
   [[nodiscard]] std::size_t strLen_(const T *) const;
 
-  static constexpr const char *const outOfRangeMsg_ = "out of range";
-  static constexpr std::size_t ssoBufSize_ = 16;
+  static constexpr auto outOfRangeMsg_ = "out of range";
+  static constexpr auto ssoBufSize_ = 16ULL;
 
   T *data_;
   std::size_t size_;
@@ -84,17 +84,18 @@ mcpp::BasicString<T>::BasicString(const BasicString &other)
 template <mcpp::Char T>
 inline mcpp::BasicString<T>::BasicString(BasicString &&other) noexcept
     : data_(buf_), size_(other.size_) {
-  if (other.size_ > 16) {
+  if (other.size_ > ssoBufSize_) {
     data_ = other.data_;
     other.data_ = nullptr;
-  } else
+  } else {
     std::copy(other.data_, other.data_ + size_, buf_);
+  }
   other.size_ = 0;
 }
 
 template <mcpp::Char T> mcpp::BasicString<T>::BasicString(const T *other) {
   size_ = strLen_(other);
-  data_ = size_ > 16 ? new T[size_] : buf_;
+  data_ = size_ > ssoBufSize_ ? new T[size_] : buf_;
   std::copy(other, other + size_, data_);
 }
 

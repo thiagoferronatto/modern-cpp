@@ -41,7 +41,7 @@ public:
   [[nodiscard]] const T &operator[](std::size_t) const;
   T &operator[](std::size_t);
 
-  [[nodiscard]] std::size_t length() const;
+  [[maybe_unused]] [[nodiscard]] std::size_t length() const;
 
   friend std::ostream &operator<<(std::ostream &os, const BasicString &str) {
     std::copy(str.data_, str.data_ + str.size_, std::ostream_iterator<T>(os));
@@ -64,9 +64,9 @@ private:
 };
 
 using String = BasicString<char>;
-using WString = BasicString<wchar_t>;
-using String16 = BasicString<char16_t>;
-using String32 = BasicString<char32_t>;
+using WString [[maybe_unused]] = BasicString<wchar_t>;
+using String16 [[maybe_unused]] = BasicString<char16_t>;
+using String32 [[maybe_unused]] = BasicString<char32_t>;
 
 } // namespace mcpp
 
@@ -240,7 +240,7 @@ inline T &mcpp::BasicString<T>::operator[](std::size_t index) {
 }
 
 template <mcpp::Char T>
-inline std::size_t mcpp::BasicString<T>::length() const {
+[[maybe_unused]] inline std::size_t mcpp::BasicString<T>::length() const {
   return size_;
 }
 

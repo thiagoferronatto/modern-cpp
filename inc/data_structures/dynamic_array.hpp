@@ -94,7 +94,7 @@ const auto &Array<T>::operator[](std::size_t index) const {
   // if (index >= size_)
   // throw std::out_of_range(outOfRangeMsg_);
   // return data_[index];
-  return const_cast<const Array *>(this).operator[](index); // ? valid i guess
+  return const_cast<const Array *>(this)->operator[](index); // ? valid i guess
 }
 
 template <typename T> auto &Array<T>::operator[](std::size_t index) {

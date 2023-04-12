@@ -9,7 +9,6 @@
 #include <memory>
 #include <sstream>
 #include <string>
-#include <type_traits>
 
 // stolen from https://stackoverflow.com/a/4541470
 template <typename T> std::string demangledName() {
@@ -20,12 +19,6 @@ template <typename T> std::string demangledName() {
 
   return status == 0 ? res.get() : typeid(T).name();
 }
-
-template <typename T> struct TypeInfo {
-  static constexpr auto size = sizeof(T);
-  static constexpr auto min = std::numeric_limits<T>::min();
-  static constexpr auto max = std::numeric_limits<T>::max();
-};
 
 template <typename T> auto getTypeInfo() {
   std::conditional_t<mcpp::type_traits::IsCharV<T>, long long, T>

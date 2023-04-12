@@ -22,8 +22,8 @@ public:
     Iterator(const Iterator &);
 
     Iterator &operator=(const Iterator &);
-    Iterator operator++();
-    const Iterator operator++(int);
+    Iterator &operator++();
+    Iterator operator++(int);
     T operator*() const;
     T &operator*();
     bool operator==(const Iterator &) const;
@@ -75,13 +75,13 @@ iteratorCopyAssignmentOperatorReturn:
 }
 
 template <typename T>
-LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++() {
+LinkedList<T>::Iterator &LinkedList<T>::Iterator::operator++() {
   advanceIfNotNull_();
   return *this;
 }
 
 template <typename T>
-const LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++(int) {
+LinkedList<T>::Iterator LinkedList<T>::Iterator::operator++(int) {
   const auto result = Iterator(*this);
   advanceIfNotNull_();
   return result;
@@ -156,7 +156,9 @@ template <typename T> auto LinkedList<T>::clear() {
   size_ = 0;
 }
 
-template <typename T> [[maybe_unused]] auto LinkedList<T>::size() const { return size_; }
+template <typename T> [[maybe_unused]] auto LinkedList<T>::size() const {
+  return size_;
+}
 
 template <typename T> auto LinkedList<T>::begin() { return Iterator(head_); }
 
@@ -168,6 +170,6 @@ template <typename T> auto LinkedList<T>::begin() const {
 
 template <typename T> auto LinkedList<T>::end() const { return Iterator(); }
 
-} // namespace class_of_2023_03_09
+} // namespace mcpp::data_structures
 
 #endif // MODERN_CPP_INC_DATA_STRUCTURES_LINKED_LIST_HPP

@@ -54,7 +54,6 @@ private:
   explicit BasicString(std::size_t);
 
   [[nodiscard]] std::size_t strLen_(const T *) const;
-  void resize_(std::size_t);
 
   static constexpr const char *const outOfRangeMsg_ = "out of range";
   static constexpr std::size_t ssoBufSize_ = 16;
@@ -65,6 +64,9 @@ private:
 };
 
 using String = BasicString<char>;
+using WString = BasicString<wchar_t>;
+using String16 = BasicString<char16_t>;
+using String32 = BasicString<char32_t>;
 
 } // namespace mcpp
 
@@ -251,12 +253,6 @@ std::size_t mcpp::BasicString<T>::strLen_(const T *str) const {
   for (; *p != 0; ++p)
     ;
   return p - str;
-}
-
-template <mcpp::Char T>
-void mcpp::BasicString<T>::resize_(std::size_t newSize) {
-  delete[] data_;
-  data_ = new T[size_ = newSize];
 }
 
 #endif // MODERN_CPP_INC_MISC_STRING_HPP

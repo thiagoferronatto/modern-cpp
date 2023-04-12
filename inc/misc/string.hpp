@@ -246,7 +246,9 @@ inline std::size_t mcpp::BasicString<T>::length() const {
 
 template <mcpp::Char T>
 mcpp::BasicString<T>::BasicString(std::size_t initialCapacity)
-    : data_(new T[initialCapacity]), size_(initialCapacity) {}
+    : size_(initialCapacity) {
+  data_ = size_ > ssoBufSize_ ? new T[size_] : buf_;
+}
 
 template <mcpp::Char T>
 std::size_t mcpp::BasicString<T>::strLen_(const T *str) const {

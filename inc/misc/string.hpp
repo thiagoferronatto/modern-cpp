@@ -136,6 +136,7 @@ mcpp::BasicString<T>::operator=(BasicString &&other) noexcept {
     if (data_ != buf_)
       delete[] data_;
     data_ = other.data_;
+    other.data_ = nullptr;
   } else {
     if (data_ != buf_) {
       delete[] data_;
@@ -144,7 +145,6 @@ mcpp::BasicString<T>::operator=(BasicString &&other) noexcept {
     std::copy(other.data_, other.data_ + other.size_, data_); // tiny copy
   }
   size_ = other.size_;
-  other.data_ = nullptr;
   other.size_ = 0;
 skipMove:
   return *this;

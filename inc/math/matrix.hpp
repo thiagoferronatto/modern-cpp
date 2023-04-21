@@ -11,6 +11,7 @@
 
 namespace mcpp::math {
 
+// TODO: define members outside
 template <std::floating_point T, std::size_t width_, std::size_t height_>
 class Matrix {
   using MatrixInitList = std::initializer_list<std::initializer_list<T>>;

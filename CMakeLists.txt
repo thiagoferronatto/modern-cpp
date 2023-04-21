@@ -22,4 +22,4 @@ add_executable(modern_cpp
         src/tests/fundamental_types_tests.cpp
         inc/misc/string.hpp
         src/tests/string_tests.cpp
-        inc/tests/string_tests.hpp)
+        inc/tests/string_tests.hpp inc/math/matrix.hpp)

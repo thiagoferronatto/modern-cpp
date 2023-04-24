@@ -49,15 +49,17 @@ public:
   operator*(const Matrix<T, otherWidth, width_> &) const;
 
   template <std::size_t w = width_, std::size_t h = height_>
-  typename std::enable_if_t<w == 1 || h == 1, T> dot(const Matrix &) const;
+  [[nodiscard]] typename std::enable_if_t<w == 1 || h == 1, T>
+  dot(const Matrix &) const;
 
   template <std::size_t w = width_, std::size_t h = height_>
+  [[nodiscard]]
   typename std::enable_if_t<(w == 1 && h == 3) || (h == 1 && w == 3),
                             Matrix<T, w, h>>
   cross(const Matrix &) const;
 
   template <std::size_t w = width_, std::size_t h = height_>
-  typename std::enable_if_t<w == 1 || h == 1, T> length() const;
+  [[nodiscard]] typename std::enable_if_t<w == 1 || h == 1, T> length() const;
 
   Matrix &operator+=(const Matrix &) const;
   Matrix &operator-=(const Matrix &) const;

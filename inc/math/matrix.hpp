@@ -13,6 +13,7 @@
 
 namespace mcpp::math {
 
+// TODO: if constexpr (width_ == 0 || height_ == 0) { /* treat as dynamic */ }
 template <std::floating_point T, std::size_t width_, std::size_t height_>
 class Matrix {
   using MatrixInitList = std::initializer_list<std::initializer_list<T>>;

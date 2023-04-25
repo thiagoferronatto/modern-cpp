@@ -75,7 +75,7 @@ public:
   operator()(std::size_t) const;
 
   [[nodiscard]] Matrix<T, height_, width_> transposed() const;
-  void transpose();
+  typename std::enable_if_t<width_ == height_, void> transpose();
 
   [[nodiscard]] std::size_t width() const;
   [[nodiscard]] std::size_t height() const;
@@ -325,7 +325,8 @@ Matrix<T, height_, width_> Matrix<T, width_, height_>::transposed() const {
 }
 
 template <std::floating_point T, std::size_t width_, std::size_t height_>
-void Matrix<T, width_, height_>::transpose() {
+typename std::enable_if_t<width_ == height_, void>
+Matrix<T, width_, height_>::transpose() {
   *this = std::move(transposed());
 }
 

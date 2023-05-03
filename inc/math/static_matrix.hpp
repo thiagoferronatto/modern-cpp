@@ -173,6 +173,7 @@ Matrix<T, width_, height_> &
 Matrix<T, width_, height_>::operator=(Matrix &&other) noexcept {
   if (this == &other)
     goto skipMove;
+  delete[] data_;
   data_ = other.data_;
   other.data_ = nullptr;
 skipMove:

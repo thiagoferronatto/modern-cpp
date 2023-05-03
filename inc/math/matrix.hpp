@@ -58,6 +58,7 @@ public:
       goto skipMove;
     width_ = other.width();
     height_ = other.height();
+    delete[] data_;
     data_ = other.data_;
     if constexpr (w == 0 || h == 0)
       other.width_ = other.height_ = 0;

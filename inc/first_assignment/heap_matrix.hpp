@@ -49,7 +49,7 @@ public:
   }
 
   HeapMatrix operator+(const HeapMatrix &other) const {
-    return HeapMatrix(matrix_->operator+(*(other.matrix_.get())));
+    return HeapMatrix(matrix_->operator+(*other.matrix_.get()));
   }
 
   // TODO: finish implementing relevant methods

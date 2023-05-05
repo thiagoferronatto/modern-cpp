@@ -25,4 +25,4 @@ add_executable(modern_cpp
         src/tests/string_tests.cpp
         inc/tests/string_tests.hpp
         inc/math/matrix.hpp
-        inc/math/static_matrix.hpp)
+        inc/math/static_matrix.hpp inc/first_assignment/heap_matrix.hpp)

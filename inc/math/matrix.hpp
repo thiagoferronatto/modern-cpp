@@ -202,9 +202,16 @@ public:
 
   [[nodiscard]] std::size_t height() const { return height_; }
 
+  [[nodiscard]] const T *begin() const { return data_; }
+  [[nodiscard]] T *begin() { return data_; }
+  [[nodiscard]] const T *end() const { return data_ + width_ * height_; }
+  [[nodiscard]] T *end() { return data_ + width_ * height_; }
+
 private:
   std::size_t width_, height_;
   T *data_;
+
+  template <std::floating_point U> friend class HeapMatrix;
 };
 
 // aliases
